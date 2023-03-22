@@ -12,16 +12,13 @@ QueueHandle_t serialGKQueue;
 struct sen{
    int8_t id;
    int8_t value;
-}
+};
 
 void setup()
 {
   //open serial port
   Serial.begin(9600);
   
-  //initialize random number generator
-  randomSeed(analogRead(A0));
-
   //creation of tasks
   xTaskCreate(vS1Task,        "SENSOR 1 TASK",          100, NULL, 2, NULL);
   xTaskCreate(vS2Task,        "SENSOR 2 TASK",          100, NULL, 2, NULL);
@@ -122,7 +119,7 @@ void vS3Task(void * pvParameters)
 
 void vGKSerialTask(void * pvParameters)
 {
-  int8_t senInfoReceived;
+  sen senInfoReceived;
   
   BaseType_t qStatus;
   //const TickType_t xTicksToWait = pdMS_TO_TICKS(100);
